@@ -20,6 +20,11 @@ class Employee(db.Model):
     hire_date = db.Column(db.Date)
 
     reviews = db.relationship('Review')
+# Foreign key to store the employee id
+    employee_id = db.Column(db.Integer, db.ForeignKey('employees.id'))
+
+    # Relationship mapping the review to related employee
+    employee = db.relationship('Employee', back_populates="reviews", back_populates="employee")
 
     def __repr__(self):
         return f"<Employee {self.id}, {self.name}, {self.hire_date}>"
